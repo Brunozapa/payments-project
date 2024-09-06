@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres_account:
+    image: postgres:15
+    container_name: postgres_account
+    environment:
+      POSTGRES_USER: account_db
+      POSTGRES_PASSWORD: account_db
+      POSTGRES_DB: account_db
+    ports:
+      - "5432:5432"
+
+#  account_service:
+#    image: openjdk:17-jdk
+#    container_name: account-service
+#    depends_on:
+#      - postgres
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/account_db
+#      SPRING_DATASOURCE_USERNAME: account_db
+#      SPRING_DATASOURCE_PASSWORD: account_db
+#    volumes:
+#      - ./target:/app
+
+volumes:
+  postgres_data:
