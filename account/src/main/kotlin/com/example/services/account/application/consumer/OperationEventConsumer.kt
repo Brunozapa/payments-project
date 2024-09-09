@@ -4,7 +4,6 @@ import com.example.services.account.application.consumer.message.OperationEventM
 import com.example.services.account.application.service.OperationService
 import com.example.services.account.domain.entity.enums.OperationType
 import com.example.services.account.domain.exception.AccountLockedException
-import com.example.services.account.domain.exception.BusinessException
 import com.fasterxml.jackson.databind.ObjectMapper
 import mu.KLogging
 import org.springframework.kafka.annotation.KafkaListener
@@ -21,17 +20,6 @@ class OperationEventConsumer(
     @KafkaListener(topics = [TOPIC_TRANSACTION_EVENT])
     @RetryableTopic(attempts = "3", backoff = Backoff(delay = 2000), include = [AccountLockedException::class])
     fun consume(message: String) {
-        objectMapper.readValue(message, OperationEventMessage::class.java).let {
-            when (it.operationType) {
-                OperationType.CREDIT -> operationService.credit(it.accountId, it.amount)
-                OperationType.DEBIT -> operationService.debit(it.accountId, it.amount)
-            }
-        }
-    }
-
-    @KafkaListener(topics = [TOPIC_TRANSACTION_EVENT])
-    @RetryableTopic(attempts = "3", backoff = Backoff(delay = 2000), include = [AccountLockedException::class])
-    fun consume1(message: String) {
         try {
             logger.info { "Received message: $message" }
 

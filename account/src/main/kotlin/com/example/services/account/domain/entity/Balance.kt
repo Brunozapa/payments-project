@@ -11,6 +11,6 @@ value class Balance(val value: BigDecimal) {
         )
     }
 
-    fun add(value: BigDecimal) = Balance(this.value + value)
-    fun subtract(value: BigDecimal) = Balance(this.value - value)
+    fun add(addValue: BigDecimal) = Balance(this.value + addValue)
+    fun subtract(subValue: BigDecimal) = Balance(this.value - subValue)
 }
