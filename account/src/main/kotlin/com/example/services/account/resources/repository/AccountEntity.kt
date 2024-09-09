@@ -1,9 +1,8 @@
 package com.example.services.account.resources.repository
 
 import com.example.services.account.domain.entity.Account
-import com.example.services.account.domain.entity.Amount
+import com.example.services.account.domain.entity.Balance
 import com.example.services.account.domain.entity.Birthdate
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
@@ -21,22 +20,19 @@ data class AccountEntity(
     val birthdate: LocalDate,
     val phone: String?,
     val email: String?,
-    val amount: BigDecimal,
+    val balance: BigDecimal,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime? = null,
-
-    @Column(insertable = false, updatable = false)
-    val lockKey: Int? = null
+    val updatedAt: LocalDateTime? = LocalDateTime.now(),
 ) {
-    fun toDomain() = Account(
+    fun toDomain() = Account.of(
         id = id,
         name = name,
         cpf = cpf,
         birthdate = Birthdate(birthdate),
         phone = phone,
         email = email,
-        amount = Amount(amount)
+        balance = Balance(balance)
     )
 
     companion object {
@@ -47,7 +43,7 @@ data class AccountEntity(
             birthdate = account.birthdate.value,
             phone = account.phone,
             email = account.email,
-            amount = account.amount.value
+            balance = account.balance.value
         )
     }
 }

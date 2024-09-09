@@ -1,6 +1,7 @@
 package com.example.services.account.application.web.response
 
 import com.example.services.account.domain.entity.Account
+import java.math.BigDecimal
 import java.time.LocalDate
 
 data class AccountResponse(
@@ -9,7 +10,8 @@ data class AccountResponse(
     val cpf: String,
     val birthdate: LocalDate,
     val phone: String? = null,
-    val email: String? = null
+    val email: String? = null,
+    val balance: BigDecimal
 ) {
     companion object {
         fun of(account: Account) = AccountResponse(
@@ -18,7 +20,8 @@ data class AccountResponse(
             cpf = account.cpf,
             birthdate = account.birthdate.value,
             phone = account.phone,
-            email = account.email
+            email = account.email,
+            balance = account.balance.value
         )
     }
 }
