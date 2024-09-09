@@ -11,6 +11,7 @@ import com.example.services.account.application.web.response.OperationResponse
 import com.example.services.account.application.web.response.OperationStatus
 import com.example.services.account.domain.entity.enums.OperationType
 import com.example.services.account.domain.exception.BusinessException
+import mu.KLogging
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -33,27 +34,44 @@ class AccountController(
 ) {
     @PostMapping
     fun create(@RequestBody request: CreateAccountRequest): ResponseEntity<AccountResponse> {
+        logger.info { "Create account request received. $request" }
         val account = createAccountService.execute(request)
-        return ResponseEntity(AccountResponse.of(account), HttpStatus.CREATED)
+        return ResponseEntity(AccountResponse.of(account), HttpStatus.CREATED).also {
+            logger.info { "Create account request processed with success." }
+        }
     }
 
     @GetMapping("/{id}")
     fun find(@PathVariable id: String): ResponseEntity<AccountResponse> {
+        logger.info { "Find account request received for id: $id" }
         val account = findAccountService.findById(id)
-        return ResponseEntity(AccountResponse.of(account), HttpStatus.OK)
+        return ResponseEntity(AccountResponse.of(account), HttpStatus.OK).also {
+            logger.info { "Find account request processed with success for id: $id" }
+        }
     }
 
     @PostMapping("/{id}/debit")
     fun debitAmount(
         @PathVariable id: String,
         @RequestBody request: OperationRequest
-    ): ResponseEntity<OperationResponse> = executeBalanceOperation { operationService.debit(id, request.amount) }
+    ): ResponseEntity<OperationResponse> {
+        logger.info { "Debit request received for account id: $id with amount: ${request.amount}" }
+        return executeBalanceOperation { operationService.debit(id, request.amount) }.also {
+            logger.info { "Debit request processed with success for account id: $id" }
+        }
+    }
 
     @PostMapping("/{id}/credit")
     fun creditAmount(
         @PathVariable id: String,
         @RequestBody request: OperationRequest
-    ): ResponseEntity<OperationResponse> = executeBalanceOperation { operationService.credit(id, request.amount) }
+    ): ResponseEntity<OperationResponse> {
+        logger.info { "Credit request received for account id: $id with amount: ${request.amount}" }
+        return executeBalanceOperation { operationService.credit(id, request.amount) }.also {
+            logger.info { "Credit request processed with success for account id: $id" }
+
+        }
+    }
 
     private fun executeBalanceOperation(
         operation: () -> Unit
@@ -78,4 +96,6 @@ class AccountController(
             BigDecimal.TEN
         ))
     }
+
+    companion object : KLogging()
 }

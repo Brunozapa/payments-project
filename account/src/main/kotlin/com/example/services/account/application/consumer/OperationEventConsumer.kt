@@ -6,6 +6,7 @@ import com.example.services.account.domain.entity.enums.OperationType
 import com.example.services.account.domain.exception.AccountLockedException
 import com.example.services.account.domain.exception.BusinessException
 import com.fasterxml.jackson.databind.ObjectMapper
+import mu.KLogging
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.annotation.RetryableTopic
 import org.springframework.retry.annotation.Backoff
@@ -28,7 +29,28 @@ class OperationEventConsumer(
         }
     }
 
-    companion object {
+    @KafkaListener(topics = [TOPIC_TRANSACTION_EVENT])
+    @RetryableTopic(attempts = "3", backoff = Backoff(delay = 2000), include = [AccountLockedException::class])
+    fun consume1(message: String) {
+        try {
+            logger.info { "Received message: $message" }
+
+            val operationEvent = objectMapper.readValue(message, OperationEventMessage::class.java)
+            when (operationEvent.operationType) {
+                OperationType.CREDIT -> {
+                    operationService.credit(operationEvent.accountId, operationEvent.amount)
+                }
+                OperationType.DEBIT -> {
+                    operationService.debit(operationEvent.accountId, operationEvent.amount)
+                }
+            }
+        } catch (e: Exception) {
+            logger.error(e) { "Error processing message: $message" }
+            throw e
+        }
+    }
+
+    companion object : KLogging() {
         const val TOPIC_TRANSACTION_EVENT = "TOPIC.OPERATION.EVENT"
     }
 }

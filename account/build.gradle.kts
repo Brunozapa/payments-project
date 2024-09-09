@@ -28,6 +28,8 @@ dependencies {
 	implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0")
 	implementation("org.springframework.retry:spring-retry:2.0.8")
 
+	implementation ("io.github.microutils:kotlin-logging-jvm:2.0.11")
+
 	implementation("org.postgresql:postgresql")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-database-postgresql")
