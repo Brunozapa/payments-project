@@ -33,7 +33,7 @@ class Transaction private constructor(
         private set
 
 
-    fun updateStatus(newStatus: TransactionStatus, details: String?): Transaction {
+    fun updateStatus(newStatus: TransactionStatus, details: String? = null): Transaction {
         this.status = newStatus
         this.statusDetails = details
 

@@ -19,12 +19,10 @@ class TransactionCreatedEventListener(
             logger.info { "Created transaction event received for transactionId ${event.transaction.id}" }
             transactionEventProducer.sendMessage(event.transaction)
         } catch (ex: Exception) {
-            val failMessage = "Fail to process transaction event."
-            logger.error(ex) { "$failMessage $event" }
-            event.transaction.updateStatus(TransactionStatus.FAILED, failMessage).also {
+            logger.error(ex) { "Fail to process transaction event. $event" }
+            event.transaction.updateStatus(TransactionStatus.FAILED).also {
                 transactionRepository.save(it)
             }
-
         }
     }
 
