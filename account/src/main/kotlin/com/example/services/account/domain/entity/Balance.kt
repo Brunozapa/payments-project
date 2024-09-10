@@ -7,7 +7,7 @@ import java.math.BigDecimal
 value class Balance(val value: BigDecimal) {
     init {
         if (value < BigDecimal.ZERO) throw InvalidBalanceException(
-            "O saldo da conta deve ser maior que zero."
+            "O saldo da conta não pode ser negativo."
         )
     }
 

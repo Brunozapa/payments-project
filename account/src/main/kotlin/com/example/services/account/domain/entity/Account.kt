@@ -1,5 +1,6 @@
 package com.example.services.account.domain.entity
 
+import com.example.services.account.domain.entity.enums.OperationType
 import com.example.services.account.domain.exception.InvalidTransactionAmountException
 import de.huxhorn.sulky.ulid.ULID
 import java.math.BigDecimal
@@ -11,7 +12,6 @@ class Account private constructor(
     val birthdate: Birthdate,
     phone: String?,
     email: String?,
-
     balance: Balance
 ) {
 
