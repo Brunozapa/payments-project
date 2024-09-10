@@ -36,7 +36,7 @@ class StartTransactionService(
             accountId = receiptRequest.accountId,
             amount = receiptRequest.amount,
             transactionDate = LocalDateTime.now(),
-            type = TransactionType.PAYMENT,
+            type = TransactionType.RECEIPT,
             payerName = receiptRequest.payerName
         )
 
