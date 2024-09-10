@@ -2,7 +2,6 @@ package com.example.services.transaction.application.service
 
 import com.example.services.transaction.application.web.request.PaymentRequest
 import com.example.services.transaction.application.web.request.ReceiptRequest
-import com.example.services.transaction.domain.entity.enums.TransactionType
 import com.example.services.transaction.domain.repository.TransactionRepository
 import com.example.services.transaction.factory.TransactionFactory
 import io.mockk.every
@@ -20,7 +19,6 @@ class StartTransactionServiceTest {
     @Test
     fun `should create payment transaction successfully`() {
         val paymentRequest = PaymentRequest(
-            type = TransactionType.PAYMENT,
             accountId = "accountId",
             amount = BigDecimal("100.00"),
             receiverName = "Pedro"
@@ -39,7 +37,6 @@ class StartTransactionServiceTest {
     @Test
     fun `should create receipt transaction successfully`() {
         val receiptRequest = ReceiptRequest(
-            type = TransactionType.RECEIPT,
             accountId = "accountId",
             amount = BigDecimal("50.00"),
             payerName = "Pedro"

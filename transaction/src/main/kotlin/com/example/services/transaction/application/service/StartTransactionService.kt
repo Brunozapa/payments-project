@@ -41,7 +41,7 @@ class StartTransactionService(
         )
 
         return transactionRepository.save(transaction).also {
-            logger.info { "Transaction created with success" }
+            logger.info { "Transaction created with success. $it" }
         }
     }
 
