@@ -1,4 +1,4 @@
-# payments-project
+# Gerenciador de Transações de Conta (payments-project)
 
 ## Requisitos
 
