@@ -8,7 +8,6 @@ plugins {
 }
 
 group = "com.example.services"
-version = "0.0.1-SNAPSHOT"
 
 java {
 	toolchain {
@@ -47,6 +46,10 @@ kotlin {
 	compilerOptions {
 		freeCompilerArgs.addAll("-Xjsr305=strict")
 	}
+}
+
+tasks.withType<Jar> {
+	archiveBaseName.set("account-service")
 }
 
 tasks.withType<Test> {
