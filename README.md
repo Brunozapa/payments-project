@@ -3,7 +3,7 @@
 ## Requisitos
 
 - [Docker](https://www.docker.com/get-started) (inclui Docker Compose)
-- [Java 17](https://adoptium.net/)
+- [Java 17]([https://adoptium.net/](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html))
 - [Gradle](https://gradle.org/install/) (para compilar o projeto, se não estiver usando o Gradle Wrapper)
 
 ## Instruções para execução local
