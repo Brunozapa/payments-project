@@ -21,7 +21,7 @@ Siga estas etapas para construir os arquivos JAR para cada serviço:
     ```bash
     ./gradlew build
     ```
-    para windows
+    para windows:
     ```bash
     ./gradlew.bat build
     ```
@@ -37,7 +37,7 @@ Siga estas etapas para construir os arquivos JAR para cada serviço:
     ```bash
     ./gradlew build
     ```
-    para windows
+    para windows:
     ```bash
     ./gradlew.bat build
     ```
