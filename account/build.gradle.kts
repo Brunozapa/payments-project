@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.3.0")
 	implementation("org.springframework.retry:spring-retry:2.0.8")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 
 	implementation ("io.github.microutils:kotlin-logging-jvm:2.0.11")
 
