@@ -76,5 +76,7 @@ Depois de construir os arquivos JAR, você pode construir e executar os contêin
 
 ## Acessando os Serviços
 
-- **Account Service**: [http://localhost:8080](http://localhost:8080)
-- **Transaction Service**: [http://localhost:8081](http://localhost:8081)
+- **Account Service**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Transaction Service**:[http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
+
+- Para utilizar as APIs, pode importar a collection presente no projeto. `projeto conta debito e credito.postman_collection`
